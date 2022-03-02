@@ -4,7 +4,7 @@ import SearchBar from "../SearchBar";
 import yelp from "../../api/yelp";
 import ResultsList from "../ResultsList";
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,7 +39,7 @@ const SearchScreen = () => {
   // searchApi('pasta');
 
   useEffect(() => {
-    searchApi("pasta");
+    searchApi();
   }, []);
 
   return (
@@ -55,9 +55,18 @@ const SearchScreen = () => {
         <ResultsList
           results={filterResultByPrice("$")}
           title="Cost Effective"
+          navigation={navigation}
         />
-        <ResultsList results={filterResultByPrice("$$")} title="Bit Pricier" />
-        <ResultsList results={filterResultByPrice("$$$")} title="Big Spender" />
+        <ResultsList
+          results={filterResultByPrice("$$")}
+          title="Bit Pricier"
+          navigation={navigation}
+        />
+        <ResultsList
+          results={filterResultByPrice("$$$")}
+          title="Big Spender"
+          navigation={navigation}
+        />
       </ScrollView>
     </View>
   );
